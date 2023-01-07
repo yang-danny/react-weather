@@ -3,16 +3,23 @@ import { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import CityTabs from './components/CityTaps';
 import ThemeSwitch from './components/ThemeSwitch';
+import SearchCity from './components/SearchCity';
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 
 function App() {
   const API_KEY = "6068988c93bdf2961e4cde8b6b1fe395";
   const [city, setCity] = useState("");
   const [darkMode, setDarkMode] = useState(false);
+  const [searchCity, setSearchCity] = useState('');
   const [weather, setWeather] = useState('')
+
   useEffect(() => {
     getWeatherData(city)
   }, [city]);
+
+  useEffect(() => {
+    getWeatherData(searchCity)
+  }, [searchCity]);
   const getWeatherData = async (location) => {
     if (location){
     setWeather([])
@@ -35,6 +42,15 @@ function App() {
     }
   }
   }
+  const setLocalWeather=()=>{
+    navigator.geolocation.getCurrentPosition(localLocation);
+  }
+  const localLocation = (location) => {
+    if (location){
+    const { latitude, longitude } = location.coords;
+    getWeatherData([latitude, longitude]);
+    } else return
+  };
   const darkTheme = createTheme({
     components: {
       MuiCssBaseline: {
@@ -90,7 +106,7 @@ function App() {
         <CityTabs onChange={(value)=> setCity(value)} />
         <ThemeSwitch  checked={darkMode}  onChange={()=> setDarkMode(!darkMode)} sx={{ m: 1 }} />
       </Box>
-             
+      <SearchCity   onSubmit={(value)=> setSearchCity(value)} onClick={()=> setLocalWeather()}/>       
       </ThemeProvider>
   </Box>
   );
