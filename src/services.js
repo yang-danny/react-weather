@@ -19,10 +19,9 @@ const iconUrlFromCode = (code) =>
 
 function BackgroundImage(data) {
   let id = 0;
-  let weatherId=data.list[0].weather[0].id
-  console.log(weatherId)
-  if (!Array.isArray(data) && !weatherId) {
-    id = weatherId;
+
+  if (!Array.isArray(data) && data.list[0].weather[0].idherId) {
+    id = data.list[0].weather[0].id;
   }
   function getImageUrl(weatherId) {
     
