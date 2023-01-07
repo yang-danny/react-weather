@@ -4,15 +4,18 @@ import Box from '@mui/material/Box';
 import CityTabs from './components/CityTaps';
 import ThemeSwitch from './components/ThemeSwitch';
 import SearchCity from './components/SearchCity';
+import LocalWeather from './components/LocalWeather';
+import ForecastWeather from './components/ForecastWeather';
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
-
+import {BackgroundImage} from './services'
+  
 function App() {
   const API_KEY = "6068988c93bdf2961e4cde8b6b1fe395";
   const [city, setCity] = useState("");
   const [darkMode, setDarkMode] = useState(false);
   const [searchCity, setSearchCity] = useState('');
   const [weather, setWeather] = useState('')
-
+  const weatherData=JSON.parse(localStorage.getItem('weather'))
   useEffect(() => {
     getWeatherData(city)
   }, [city]);
@@ -20,6 +23,11 @@ function App() {
   useEffect(() => {
     getWeatherData(searchCity)
   }, [searchCity]);
+
+  useEffect(() => {
+
+  }, [weather]);
+
   const getWeatherData = async (location) => {
     if (location){
     setWeather([])
@@ -91,7 +99,7 @@ function App() {
         width: 'auto',
         height: '100%',
         borderRadius: '16px',
-    //   backgroundImage:`url(${BackgroundImage(weatherData)})`,
+        backgroundImage:`url(${BackgroundImage(weatherData)})`,
     backgroundRepeat: "no-repeat",
 			backgroundPosition: "center center",  
       backgroundSize: "cover",  
@@ -107,6 +115,8 @@ function App() {
         <ThemeSwitch  checked={darkMode}  onChange={()=> setDarkMode(!darkMode)} sx={{ m: 1 }} />
       </Box>
       <SearchCity   onSubmit={(value)=> setSearchCity(value)} onClick={()=> setLocalWeather()}/>       
+      <LocalWeather/>
+      <ForecastWeather/>
       </ThemeProvider>
   </Box>
   );
