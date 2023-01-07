@@ -15,7 +15,12 @@ import formatToLocalTime, { iconUrlFromCode,formatTime } from '../services'
 
 function LocalWeather() {
  const weatherData=JSON.parse(localStorage.getItem('weather'))
- 
+if(!weatherData.city || !weatherData.list)
+{
+return console.log('Please provide')
+} else {
+
+
   return (
     <Box sx={{ textAlign: 'center', fontFamily: 'default', }}>
       <Box sx={{  mx: 'auto', mb:'auto', width: '75%', textAlign: 'left', fontSize: 'h4.fontSize', fontWeight: 'light' }}>
@@ -84,6 +89,7 @@ function LocalWeather() {
     </Paper>
         </Box>
   )
+}
 }
 
 export default LocalWeather

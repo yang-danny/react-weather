@@ -116,7 +116,7 @@ function App() {
       </Box>
       <SearchCity   onSubmit={(value)=> setSearchCity(value)} onClick={()=> setLocalWeather()}/>       
       <LocalWeather/>
-      <ForecastWeather/>
+      {/* <ForecastWeather/> */}
       </ThemeProvider>
   </Box>
   );
