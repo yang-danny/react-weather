@@ -1,4 +1,3 @@
-import * as ReactDOM from 'react-dom';
 import React from'react';
 import { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
@@ -7,6 +6,7 @@ import ThemeSwitch from './components/ThemeSwitch';
 import SearchCity from './components/SearchCity';
 import LocalWeather from './components/LocalWeather';
 import ForecastWeather from './components/ForecastWeather';
+import Footer from './components/Footer';
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import {BackgroundImage} from './services'
   
@@ -121,6 +121,7 @@ function App() {
       <SearchCity   onSubmit={(value)=> setSearchCity(value)} onClick={()=> setLocalWeather()}/>       
       <LocalWeather/>
       <ForecastWeather/>
+      <Footer/>
       </ThemeProvider>
   </Box>
   );

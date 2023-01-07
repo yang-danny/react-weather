@@ -1,4 +1,3 @@
-import * as ReactDOM from 'react-dom';
 import React from 'react'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
