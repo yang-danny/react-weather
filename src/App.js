@@ -51,6 +51,9 @@ function App() {
     }
   }
   }
+  window.addEventListener('load', function () {
+    setLocalWeather()
+  });
   const setLocalWeather=()=>{
     navigator.geolocation.getCurrentPosition(localLocation);
   }
