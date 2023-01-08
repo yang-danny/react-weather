@@ -6,9 +6,11 @@ import {iconUrlFromCode,formatTime} from '../services'
 import CardMedia from '@mui/material/CardMedia';
 
 function ForecastWeather() {
-
+//load weather data from local storage
 const weatherDatas=JSON.parse(localStorage.getItem('weather'))
+//slice first 6 weather data from data list.
 const hourForecast = weatherDatas.list.slice(1,7)
+//pick next 5 days weather data from data list
 const dayIndex=[7,15,23,31,39]
 let dayForecast=weatherDatas.list.filter((_,index)=> dayIndex.includes(index))
 

@@ -8,6 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 export default function SearchCity(props) {
+  //handle search city event by clicking search button
   const handleSubmit = (event) => {
     event.preventDefault();
     const search = event.target.search.value;
@@ -18,6 +19,7 @@ export default function SearchCity(props) {
     alert('Please enter a city name.');
   }
 }
+//handle locate local weather event by clicking location button
 const handleClick=(event)=>{
   event.preventDefault();
   props.onClick(event.target.clicked)
@@ -32,7 +34,6 @@ const handleClick=(event)=>{
       <IconButton sx={{ p: '10px' }} aria-label="menu">
         <MenuIcon />
       </IconButton>
-      
       <InputBase
         type='text'
         sx={{ ml: 1, flex: 1 }}

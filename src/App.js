@@ -17,52 +17,66 @@ function App() {
   const [searchCity, setSearchCity] = useState('');
   const [weather, setWeather] = useState('')
   const weatherData=JSON.parse(localStorage.getItem('weather'))
+
+  //hadle user select city from top city tabs
   useEffect(() => {
     getWeatherData(city)
   }, [city]);
-
+  //hadle user search city from search bar
   useEffect(() => {
     getWeatherData(searchCity)
   }, [searchCity]);
 
+  //handle fetch weather data from API
   useEffect(() => {
-
   }, [weather]);
-
+  
+  //fetch weather data from weather API using input city name
   const getWeatherData = async (location) => {
     if (location){
     setWeather([])
+    //define search type is by city name or latitude and longitude
     let how_to_search =
       typeof location === 'string'
         ? `q=${location}`
         : `lat=${location[0]}&lon=${location[1]}`;
         const url = 'https://api.openweathermap.org/data/2.5/forecast?';
+    //fetch weather data from weather API using url
     try {
       let res = await fetch(`${url}${how_to_search}&appid=${API_KEY}&units=metric`);
       let data = await res.json();
+      //can not fetch data by input city
       if (data.cod !== '200') {
        alert('Location Not Found')
         return;
       }
-  localStorage.setItem("weather", JSON.stringify(data))
-  setWeather(data)
+      //store weather data in local storage
+      localStorage.setItem("weather", JSON.stringify(data))
+      //pass weather data to weather hook
+      setWeather(data)
     } catch (error) {
       console.log(error);
     }
   }
   }
+
+  //get local weather when page load
   window.addEventListener('load', function () {
     setLocalWeather()
   });
+  //get local location by latitude and longitude
   const setLocalWeather=()=>{
     navigator.geolocation.getCurrentPosition(localLocation);
   }
+  //get local weather data by geolocation
   const localLocation = (location) => {
     if (location){
     const { latitude, longitude } = location.coords;
     getWeatherData([latitude, longitude]);
     } else return
   };
+
+  //customize dark theme
   const darkTheme = createTheme({
     components: {
       MuiCssBaseline: {
@@ -80,6 +94,7 @@ function App() {
         }
       },
   });
+  //customize light theme
   const lightTheme = createTheme({
     components: {
       MuiCssBaseline: {
@@ -96,6 +111,7 @@ function App() {
     }
     },
   });
+  
   return (
     <Box id='container' 
       sx={{

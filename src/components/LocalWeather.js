@@ -14,12 +14,8 @@ import Grid from '@mui/material/Unstable_Grid2';
 import formatToLocalTime, { iconUrlFromCode,formatTime } from '../services'
 
 function LocalWeather() {
+  //load weather data from local storage
  const weatherData=JSON.parse(localStorage.getItem('weather'))
-if(!weatherData.city || !weatherData.list)
-{
-return console.log('Please provide')
-} else {
-
 
   return (
     <Box sx={{ textAlign: 'center', fontFamily: 'default', }}>
@@ -90,6 +86,6 @@ return console.log('Please provide')
         </Box>
   )
 }
-}
+
 
 export default LocalWeather

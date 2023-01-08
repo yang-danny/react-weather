@@ -1,30 +1,33 @@
 import moment from 'moment';
 import { DateTime } from "luxon";
 
-
+//get local time by fetched city timezone
 const formatToLocalTime=(timezone)=>{
   const timezoneInMinutes = timezone / 60;
   const LocalTime = moment().utcOffset(timezoneInMinutes).format("dddd, MMMM Do YYYY, h:mm:ss A")
   return LocalTime
 }
 
+//get day forecast date by fetched date and timezone
 const formatTime = (
   secs,
   zone,
   format = "cccc, dd LLL yyyy' | Local time: 'hh:mm a"
 ) => DateTime.fromSeconds(secs).setZone(zone).toFormat(format);
 
+//get weather icon by fetched weather icon code
 const iconUrlFromCode = (code) =>
   `http://openweathermap.org/img/wn/${code}@2x.png`;
 
+//get background image by fetched weather id
 function BackgroundImage(data) {
   let id = 0;
-
+  //define weather code
   if (!Array.isArray(data) && data.list[0].weather[0].id) {
     id = data.list[0].weather[0].id;
   }
+  //return image url by weather id
   function getImageUrl(weatherId) {
-    
     if (weatherId >= 200 && weatherId < 300) {
       return 'https://dionnerbellcom.files.wordpress.com/2020/04/live-thunderstorm.gif'; // thunderstorm
     } else if (weatherId >= 300 && weatherId < 400) {
@@ -41,7 +44,6 @@ function BackgroundImage(data) {
       return 'https://wallpapercave.com/wp/wp2757859.gif'; // cloudy day
     }
   }
-
   return getImageUrl(Number(id));
 }
 

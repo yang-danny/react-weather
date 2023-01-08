@@ -4,7 +4,9 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
 export default function CityTabs(props) {
+  //hook for handling city tab changing
   const [city, setCity] = React.useState('Sydney');
+  //handle city change and update state, post selected city
   const handleChange = (event, selectedCity) => {
     setCity(selectedCity);
     props.onChange(selectedCity);
